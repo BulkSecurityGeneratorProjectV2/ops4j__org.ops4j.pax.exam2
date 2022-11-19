@@ -36,7 +36,7 @@ class StreamBundle {
     
     public URL toTemp() {
         try {
-            File temp = File.createTempFile( "tinybundles_", ".tmp" );
+            File temp = Files.createTempFile("tinybundles_", ".tmp").toFile();
             Files.copy(stream, temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
             return temp.toURI().toURL();
         }

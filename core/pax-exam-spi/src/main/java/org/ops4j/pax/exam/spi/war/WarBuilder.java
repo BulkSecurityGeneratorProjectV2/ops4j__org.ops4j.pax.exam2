@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
@@ -169,7 +170,7 @@ public class WarBuilder {
         }
         catch (IllegalArgumentException exc) {
             InputStream is = uri.toURL().openStream();
-            File tempFile = File.createTempFile("paxexam", ".jar");
+            File tempFile = Files.createTempFile("paxexam", ".jar").toFile();
             OutputStream os = new FileOutputStream(tempFile);
             StreamUtils.copyStream(is, os, true);
             return tempFile;
@@ -281,7 +282,7 @@ public class WarBuilder {
             }
             catch (IllegalArgumentException exc) {
                 InputStream is = uri.toURL().openStream();
-                File tempFile = File.createTempFile("pax-exam", ".tmp");
+                File tempFile = Files.createTempFile("pax-exam", ".tmp").toFile();
                 OutputStream os = new FileOutputStream(tempFile);
                 StreamUtils.copyStream(is, os, true);
                 return tempFile;

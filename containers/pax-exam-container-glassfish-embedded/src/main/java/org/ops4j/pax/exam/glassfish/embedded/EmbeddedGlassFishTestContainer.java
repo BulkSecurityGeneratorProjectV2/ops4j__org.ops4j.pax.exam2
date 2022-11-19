@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Stack;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -155,7 +156,7 @@ public class EmbeddedGlassFishTestContainer implements TestContainer {
              * "Pax-Exam-Probe" );
              */
 
-            File tempFile = File.createTempFile("pax-exam", ".war");
+            File tempFile = Files.createTempFile("pax-exam", ".war").toFile();
             tempFile.deleteOnExit();
             StreamUtils.copyStream(stream, new FileOutputStream(tempFile), true);
             deployer.deploy(tempFile, "--name", PROBE_APPLICATION_NAME, "--contextroot",

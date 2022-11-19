@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
@@ -77,7 +78,7 @@ public class ArchiveExtractor {
 
     private static void extractTarGzDistribution(URL sourceDistribution, File _targetFolder)
         throws IOException {
-        File uncompressedFile = File.createTempFile("uncompressedTarGz-", ".tar");
+        File uncompressedFile = Files.createTempFile("uncompressedTarGz-", ".tar").toFile();
         extractGzArchive(sourceDistribution.openStream(), uncompressedFile);
         extract(new TarArchiveInputStream(new FileInputStream(uncompressedFile)), _targetFolder);
         FileUtils.forceDelete(uncompressedFile);

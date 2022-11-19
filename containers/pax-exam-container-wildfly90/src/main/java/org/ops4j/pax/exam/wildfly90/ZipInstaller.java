@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.ops4j.io.StreamUtils;
 import org.ops4j.io.ZipExploder;
@@ -59,7 +60,7 @@ public class ZipInstaller {
     public void downloadAndInstall() throws IOException {
         installDir.mkdirs();
 
-        File tempFile = File.createTempFile("pax-exam", ".zip");
+        File tempFile = Files.createTempFile("pax-exam", ".zip").toFile();
         FileOutputStream os = null;
         LOG.info("downloading {} to {}", zipUrl, tempFile);
         try {

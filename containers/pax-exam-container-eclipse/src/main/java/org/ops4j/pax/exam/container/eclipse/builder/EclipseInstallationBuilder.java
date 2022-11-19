@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -89,7 +90,7 @@ public class EclipseInstallationBuilder
         IOUtils.read(stream, buffer);
         stream.reset();
         if (hasSignature(buffer, ZIP_SIGNATURE)) {
-            File tempFolder = File.createTempFile("paxexam", "explode");
+            File tempFolder = Files.createTempFile("paxexam", "explode").toFile();
             tempFolder.deleteOnExit();
             FileUtils.forceDelete(tempFolder);
             FileUtils.forceMkdir(tempFolder);
